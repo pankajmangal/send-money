@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:send_money/data/network/remote/api_endpoints.dart';
 
 class DioClient {
   //Singleton instance creation....
@@ -23,7 +24,7 @@ class DioClient {
 
   //Dio instantiation with base option & interceptors....
   Dio dio = Dio(BaseOptions(
-    baseUrl: "https://jsonplaceholder.typicode.com",
+    baseUrl: ApiEndpoints.baseUrl,
     connectTimeout: const Duration(
         milliseconds: 120000), // 300000 = 60 * 2 * 1000 => 2 minute
     receiveTimeout: const Duration(

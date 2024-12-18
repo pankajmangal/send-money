@@ -31,4 +31,9 @@ class StyleUtils {
     color: ColorUtils.redAccent,
     fontWeight: FontWeight.w500,
   );
+
+  static TextStyle customTextStyle = TextStyle(
+      color: ColorUtils.whiteColor,
+      fontSize: 14.sp,
+      overflow: TextOverflow.ellipsis);
 }

@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if(mounted){
       Future.delayed(const Duration(seconds: 3), () {
         Navigator.pushNamedAndRemoveUntil(
-            context, RoutesPath.HOME, (Route route) => false);
+            context, RoutesPath.AUTH_LOGIN, (Route route) => false);
       });
     }
   }
