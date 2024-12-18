@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:send_money/bloc/auth_bloc/auth_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_bloc.dart';
 import 'package:send_money/bloc/transaction_history_bloc/transaction_history_bloc.dart';
+import 'package:send_money/data/repository/auth_repo.dart';
 import 'package:send_money/data/repository/transaction_history_repo.dart';
 import 'package:send_money/routes/PageRoutes.dart';
 import 'package:send_money/routes/RoutesPath.dart';
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
         builder: (_, child) {
           return MultiBlocProvider(
             providers: [
+              BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepo: AuthRepo())),
               BlocProvider<HomeBloc>(create: (context) => HomeBloc()),
               BlocProvider<TransactionHistoryBloc>(create: (context) =>
                   TransactionHistoryBloc(transactionHistoryRepo: TransactionHistoryRepo()))

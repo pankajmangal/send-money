@@ -17,7 +17,7 @@ class ColorUtils {
   static const darkGreyHeader = Color(0xFF686868);
   static const greyMedium = Color(0xFF595959);
   static const whiteSmoke = Color(0xffFAFAFA);
-
+  static const rememberMeColor = Color(0xffC4A07E);
 
   static const buttonGradientColor = Color(0xff9A6F57);
   static const cardBGLightColor = Color(0xffB69F84);
