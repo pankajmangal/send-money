@@ -26,9 +26,9 @@ class DioClient {
   Dio dio = Dio(BaseOptions(
     baseUrl: ApiEndpoints.baseUrl,
     connectTimeout: const Duration(
-        milliseconds: 120000), // 300000 = 60 * 2 * 1000 => 2 minute
+        milliseconds: 300000), // 300000 = 60 * 2 * 1000 => 2 minute
     receiveTimeout: const Duration(
-        milliseconds: 120000), // 300000 = 60 * 2 * 1000 => 2 minute
+        milliseconds: 300000), // 300000 = 60 * 2 * 1000 => 2 minute
   ))
     ..interceptors.add(PrettyDioLogger(
         requestHeader: true,
@@ -49,7 +49,9 @@ class DioClient {
         bool useAuthHeader = false,
         option}) async {
     cancelToken = CancelToken();
-    Map<String, dynamic> headers = useAuthHeader ? await getHeaders() : {};
+    Map<String, dynamic> headers = useAuthHeader ? await getHeaders() : {
+      "Content-Type": "application/json; charset=utf-8"
+    };
     option = Options(method: "post");
     option.headers = headers;
 

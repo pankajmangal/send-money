@@ -31,26 +31,23 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return BlocProvider(
-      create: (context) => TransactionHistoryBloc(transactionHistoryRepo: TransactionHistoryRepo()),
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(StringUtils.transactionHistoryText,
-          style: StyleUtils.appBarTextStyle)
-        ),
-        body: BlocBuilder<TransactionHistoryBloc, TransactionHistoryState>(builder: (context, state){
-          return Container(
-            width: size.width,
-            height: size.height,
-            color: ColorUtils.whiteColor,
-            child: ListView.builder(
-                itemCount: 10,
-                itemBuilder: (_, index) {
-                  return ListTile(title: Text("List 1"));
-                }),
-          );
-        })
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(StringUtils.transactionHistoryText,
+        style: StyleUtils.appBarTextStyle)
       ),
+      body: BlocBuilder<TransactionHistoryBloc, TransactionHistoryState>(builder: (context, state){
+        return Container(
+          width: size.width,
+          height: size.height,
+          color: ColorUtils.whiteColor,
+          child: ListView.builder(
+              itemCount: 10,
+              itemBuilder: (_, index) {
+                return ListTile(title: Text("List 1"));
+              }),
+        );
+      })
     );
   }
 }

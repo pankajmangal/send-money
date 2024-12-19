@@ -11,12 +11,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   Future<void> _onUserAuthenticate(
-      AuthEvent event,
+      AuthLoginEvent event,
       Emitter<AuthState> emit,
       ) async {
     emit(AuthLoadingState());
     try {
-      final isUserAuthenticated = await authRepo.userAuthenticate();
+      final isUserAuthenticated = await authRepo.userAuthenticate(event.requestData);
 
       emit(AuthLoginSuccessState(isUserLoggedIn: isUserAuthenticated));
     } catch (_) {

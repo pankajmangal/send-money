@@ -1,19 +1,19 @@
 class ApiEndpoints {
 
-  static ApiEndpoints? instance;
+  static final ApiEndpoints _instance = ApiEndpoints._internal();
 
-  ApiEndpoints._() {
-    // initialization and stuff
+  factory ApiEndpoints(){
+    return _instance;
   }
 
-  factory ApiEndpoints() {
-    instance ??= ApiEndpoints._();
-    return instance!;
-  }
+  ApiEndpoints._internal();
 
   //Base url here....
-  static const baseUrl = "https://jsonplaceholder.typicode.com";
+  static const baseUrl = "http://192.168.1.8:42456/";
 
-  //Endpoints here...
-  static const loginUrl = "/authenticate";
+  //Api endpoints here...
+  static const loginUrl = "api/authenticate";
+  static const String createTransactionUrl = "api/transaction-history";
+  static const String transactionHistoryUrl = "";
+  static const String userDataUrl = "api/user";
 }

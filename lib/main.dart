@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +15,9 @@ import 'package:send_money/routes/RoutesPath.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  //Http overrides to handle certificates related issues....
+  // HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 
@@ -46,5 +51,14 @@ class MyApp extends StatelessWidget {
             ),
           );
         });
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
