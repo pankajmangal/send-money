@@ -9,7 +9,7 @@ class ApiEndpoints {
   ApiEndpoints._internal();
 
   //Base url here....
-  static const baseUrl = "http://192.168.1.8:42456/";
+  static const baseUrl = "http://10.0.2.2:3000/";
 
   //Api endpoints here...
   static const loginUrl = "api/authenticate";

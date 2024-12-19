@@ -49,9 +49,7 @@ class DioClient {
         bool useAuthHeader = false,
         option}) async {
     cancelToken = CancelToken();
-    Map<String, dynamic> headers = useAuthHeader ? await getHeaders() : {
-      "Content-Type": "application/json; charset=utf-8"
-    };
+    Map<String, dynamic> headers = useAuthHeader ? await getHeaders() : {};
     option = Options(method: "post");
     option.headers = headers;
 
