@@ -30,7 +30,8 @@ class AuthRepo {
       try {
         Response response = await DioService.makeRESTRequest(
             urlPath: ApiEndpoints.loginUrl,
-            method: RequestMethod.postRequest
+            method: RequestMethod.postRequest,
+          data: requestData.userRequestToJson()
         );
         if (response.statusCode == 200 || response.statusCode == 201) {
           // AEViewOrderResponse aeOrderResponse = AEViewOrderResponse.fromJson(response.data);
