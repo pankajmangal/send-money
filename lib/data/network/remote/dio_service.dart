@@ -42,8 +42,8 @@ class DioService {
       PrettyDioLogger(
           requestHeader: true,
           requestBody: true,
-          responseBody: false,
-          responseHeader: false,
+          responseBody: true,
+          responseHeader: true,
           error: true,
           compact: true,
           maxWidth: 90),
