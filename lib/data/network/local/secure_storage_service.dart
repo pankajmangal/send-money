@@ -50,7 +50,7 @@ class SecureStorageService {
   }
 
   Future<String> _getData(String key) async {
-    String result = await secureStorage.read(key: key) ?? '';
+    String result = await secureStorage.read(key: key) ?? "";
     return result;
   }
 

@@ -10,11 +10,11 @@ class ApiEndpoints {
 
   //Base url here....
   // static const baseUrl = "http://10.0.2.2:3000/";
-  static const baseUrl = "https://8757-2401-4900-5fbf-eec-95bd-8e34-6919-bc55.ngrok-free.app/";
+  static const baseUrl = "https://24c0-2401-4900-1c68-671c-84bf-a63f-c70-b42.ngrok-free.app/";
 
   //Api endpoints here...
   static const loginUrl = "api/authenticate";
-  static const String createTransactionUrl = "api/transaction-history";
-  static const String transactionHistoryUrl = "";
+  static const String createTransactionUrl = "api/create-transaction";
+  static const String transactionHistoryUrl = "api/transaction-history";
   static const String userDataUrl = "api/user";
 }

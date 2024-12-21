@@ -5,7 +5,7 @@ import 'package:send_money/utils/ColorUtils.dart';
 class StyleUtils {
 
   static TextStyle appBarTextStyle = TextStyle(
-    fontSize: 14.sp,
+    fontSize: 17.sp,
     fontWeight: FontWeight.w500
   );
 

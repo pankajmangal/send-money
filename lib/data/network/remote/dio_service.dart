@@ -3,7 +3,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:send_money/data/network/local/secure_storage_service.dart';
 import 'package:send_money/data/network/remote/api_endpoints.dart';
 import 'package:send_money/data/network/remote/dio_interceptor.dart';
 import 'package:send_money/data/network/remote/refresh_token_interceptor.dart';
@@ -18,16 +20,19 @@ class DioService {
       BaseOptions? baseOptions,
       List<Interceptor>? specificInterceptors,
       required RequestMethod method,
+        bool useAuthHeader = false,
       T? data}) async {
     Dio dio = Dio(baseOptions == null
         ? BaseOptions(
             baseUrl: ApiEndpoints.baseUrl,
             method: method.getMethodName,
-            receiveTimeout: const Duration(seconds: 120))
+            receiveTimeout: const Duration(seconds: 120),
+    headers: useAuthHeader ? await getHeaders() : {})
         : baseOptions.copyWith(
             baseUrl: ApiEndpoints.baseUrl,
             method: method.getMethodName,
-            receiveTimeout: const Duration(seconds: 120)));
+            receiveTimeout: const Duration(seconds: 120),
+        headers: useAuthHeader ? await getHeaders() : {}));
 
     dio.options.headers['user_agent'] = Platform.isAndroid?"android":"ios";
     // dio.options.headers["user_ip"] = AECommonUtils.deviceIPAddress.value;
@@ -70,6 +75,24 @@ class DioService {
         return dio.patch(urlPath, data: data).then((value) => value);
       case RequestMethod.headRequest:
         return dio.head(urlPath, data: data).then((value) => value);
+    }
+  }
+
+  static Future<Map<String, String>> getHeaders() async {
+    final SecureStorageService storageService = SecureStorageService();
+    final token = await storageService.getAccessToken();
+    debugPrint("CustomerToken => $token");
+    if (token.isNotEmpty) {
+      return {
+        'Content-Type': 'application/json',
+        'user_agent':Platform.isAndroid ? "android" : "ios",
+        "Authorization": "Bearer $token"
+      };
+    } else {
+      return {
+        'Content-Type': 'application/json',
+        'user_agent':Platform.isAndroid?"android":"ios"
+      };
     }
   }
 }

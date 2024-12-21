@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:send_money/data/models/user_authenticate_request_data.dart';
+import 'package:send_money/data/models/request/user_authenticate_request_data.dart';
 
 abstract class AuthEvent extends Equatable{
   const AuthEvent();

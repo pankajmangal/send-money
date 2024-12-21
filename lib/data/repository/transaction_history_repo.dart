@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:send_money/data/models/transaction_history_data.dart';
+import 'package:send_money/data/models/response/transaction_history_data.dart';
 import 'package:send_money/data/network/remote/dio_client.dart';
 
 class TransactionHistoryRepo {

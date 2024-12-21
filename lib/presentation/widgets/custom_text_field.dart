@@ -58,9 +58,9 @@ class CustomTextField extends StatelessWidget {
             type == FieldType.eMail
                 ? LengthLimitingTextInputFormatter(35)
                 : LengthLimitingTextInputFormatter(20),
-             type == FieldType.numeric
-                ? FilteringTextInputFormatter.allow(RegExp("[0-9]"))
-                : FilteringTextInputFormatter.deny(RegExp("")),
+             // type == FieldType.numeric
+             //    ? FilteringTextInputFormatter.allow(RegExp(""))
+             //    : FilteringTextInputFormatter.deny(RegExp("")),
           ],
           keyboardType: type == FieldType.eMail
               ? TextInputType.emailAddress
@@ -123,8 +123,6 @@ class CustomTextField extends StatelessWidget {
               } : (value) {
                 if (value == '' || value == null) {
                   return "$hintText Can't be empty";
-                } else if (value.length < 10) {
-                  return "Phone number Invalid";
                 } else {
                   return null;
                 }

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:send_money/bloc/auth_bloc/auth_bloc.dart';
 import 'package:send_money/bloc/auth_bloc/auth_event.dart';
 import 'package:send_money/bloc/auth_bloc/auth_state.dart';
-import 'package:send_money/data/models/user_authenticate_request_data.dart';
+import 'package:send_money/data/models/request/user_authenticate_request_data.dart';
 import 'package:send_money/presentation/widgets/custom_error_dialog.dart';
 import 'package:send_money/presentation/widgets/custom_loader.dart';
 import 'package:send_money/presentation/widgets/custom_text_field.dart';
@@ -74,6 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           if(state is AuthErrorState){
             LoadingDialog.hide(context);
+            Fluttertoast.showToast(msg: state.errMessage);
           }
         },
         bloc: authBloc,
@@ -204,7 +206,8 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {});
   }
 
-  navigateToHome() => Navigator.pushNamed(context, RoutesPath.HOME);
+  navigateToHome() => Navigator.pushNamedAndRemoveUntil(context,
+      RoutesPath.HOME, (predicate) => false);
 
   onValidateFormField(context) async {
     debugPrint("Enter your email address");

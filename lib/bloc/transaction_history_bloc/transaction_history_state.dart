@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:send_money/data/models/transaction_history_data.dart';
+import 'package:send_money/data/models/response/transaction_history_data.dart';
 
 class TransactionHistoryState extends Equatable {
   const TransactionHistoryState();

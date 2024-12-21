@@ -46,6 +46,12 @@ dependencies:
   #Secure storage
   flutter_secure_storage: ^9.2.2
 
+  #Toast
+  fluttertoast: ^8.2.10
+
+  #Lottie
+  lottie: ^3.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,6 +73,7 @@ flutter:
   assets:
     - assets/png_images/
     - assets/svg_images/
+    - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

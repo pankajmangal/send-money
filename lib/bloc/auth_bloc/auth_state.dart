@@ -20,6 +20,13 @@ class AuthLoginSuccessState extends AuthState{
   List<Object> get props => [isUserLoggedIn];
 }
 
-class AuthErrorState extends AuthState{}
+class AuthErrorState extends AuthState{
+  final String errMessage;
+
+  const AuthErrorState({required this.errMessage});
+
+  @override
+  List<Object> get props => [errMessage];
+}
 
 class AuthLogoutSuccessState extends AuthState{}

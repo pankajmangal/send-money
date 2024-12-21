@@ -1,6 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:send_money/bloc/auth_bloc/auth_event.dart';
 import 'package:send_money/bloc/auth_bloc/auth_state.dart';
+import 'package:send_money/data/network/local/secure_storage_service.dart';
+import 'package:send_money/data/network/remote/api_result.dart';
 import 'package:send_money/data/repository/auth_repo.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -16,11 +18,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ) async {
     emit(AuthLoadingState());
     try {
-      final isUserAuthenticated = await authRepo.userAuthenticate(event.requestData);
+      final Result result = await authRepo.userAuthenticate(event.requestData);
 
-      emit(AuthLoginSuccessState(isUserLoggedIn: isUserAuthenticated));
+      if(result.isSuccess){
+        SecureStorageService storageService = SecureStorageService();
+        storageService.saveAccessToken((result.successResponse as Map<String, dynamic>)["token"]);
+        emit(const AuthLoginSuccessState(isUserLoggedIn: true));
+      }else{
+        emit(AuthErrorState(errMessage: result.failure?.statusMessage ?? ""));
+      }
     } catch (_) {
-      emit(AuthErrorState());
+      emit(const AuthErrorState(errMessage: "Something went wrong!"));
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:send_money/data/network/local/secure_storage_service.dart';
 import 'package:send_money/routes/RoutesPath.dart';
 import 'package:send_money/utils/ColorUtils.dart';
 import 'package:send_money/utils/DimensionUtils.dart';
@@ -17,17 +18,13 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+  SecureStorageService storageService = SecureStorageService();
+
   @override
   void initState() {
     super.initState();
     if (!mounted) return;
-
-    if(mounted){
-      Future.delayed(const Duration(seconds: 3), () {
-        Navigator.pushNamedAndRemoveUntil(
-            context, RoutesPath.AUTH_LOGIN, (Route route) => false);
-      });
-    }
+    checkTokenValidation();
   }
 
   @override
@@ -58,4 +55,23 @@ class _SplashScreenState extends State<SplashScreen> {
       ),
     );
   }
+
+  void checkTokenValidation() async{
+    String token = await storageService.getAccessToken();
+    if(mounted){
+      Future.delayed(const Duration(seconds: 3), () {
+        if(token.isNotEmpty){
+          navigateToHome();
+        }else{
+          navigateToLogin();
+        }
+      });
+    }
+  }
+
+  navigateToHome() => Navigator.pushNamedAndRemoveUntil(context,
+      RoutesPath.HOME, (predicate) => false);
+
+  navigateToLogin() => Navigator.pushNamedAndRemoveUntil(context,
+      RoutesPath.AUTH_LOGIN, (Route route) => false);
 }
