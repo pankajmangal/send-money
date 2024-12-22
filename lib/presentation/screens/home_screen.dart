@@ -83,7 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(padding: const EdgeInsets.only(right: DimensionUtils.padding12),
               child: InkWell(
                 onTap: (){
-                  showDialog(context: context, builder: (context){
+                  showDialog(context: context,
+                      barrierDismissible: false,
+                      builder: (context){
                     return AlertDialog(
                         surfaceTintColor: ColorUtils.whiteColor,
                         backgroundColor: ColorUtils.whiteColor,
@@ -117,12 +119,12 @@ class _HomeScreenState extends State<HomeScreen> {
             navigateToLogin();
           }
         },
-        builder: (context, state) {
-          if(state is HomeLoadingState){
+        builder: (context, homeState) {
+          if(homeState is HomeLoadingState){
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if(state is HomeSuccessState) {
+          } else if(homeState is HomeSuccessState) {
             return Column(
               children: [
                 Container(
@@ -177,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         VerticalGap(gap: 2.h),
                                         Text(
-                                            state.isSwitchChanged ? "500.00php" : "******",
+                                            state.isSwitchChanged ? "${homeState.userData.amount}php" : "******",
                                             textAlign:
                                             TextAlign.start,
                                             style: StyleUtils.tsRegularTitleStyle28
@@ -215,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             );
-          } else if(state is HomeErrorState){
+          } else if(homeState is HomeErrorState){
             return const SizedBox.shrink();
           } else{
             return const SizedBox.shrink();

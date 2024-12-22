@@ -7,10 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:send_money/bloc/auth_bloc/auth_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_toggle_bloc.dart';
-import 'package:send_money/bloc/send_money_bloc/transaction_bloc.dart';
-import 'package:send_money/bloc/transaction_history_bloc/transaction_history_bloc.dart';
+import 'package:send_money/bloc/transaction_bloc/transaction_bloc.dart';
 import 'package:send_money/data/repository/auth_repo.dart';
-import 'package:send_money/data/repository/transaction_history_repo.dart';
 import 'package:send_money/data/repository/transaction_repo.dart';
 import 'package:send_money/routes/PageRoutes.dart';
 import 'package:send_money/routes/RoutesPath.dart';
@@ -40,9 +38,7 @@ class MyApp extends StatelessWidget {
               BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepo: AuthRepo())),
               BlocProvider<HomeBloc>(create: (context) => HomeBloc(authRepo: AuthRepo())),
               BlocProvider<HomeToggleBloc>(create: (context) => HomeToggleBloc()),
-              BlocProvider<TransactionBloc>(create: (context) => TransactionBloc(transactionRepo: TransactionRepo())),
-              BlocProvider<TransactionHistoryBloc>(create: (context) =>
-                  TransactionHistoryBloc(transactionHistoryRepo: TransactionHistoryRepo()))
+              BlocProvider<TransactionBloc>(create: (context) => TransactionBloc(transactionRepo: TransactionRepo()))
             ],
             child: MaterialApp(
                 title: 'Flutter Demo',

@@ -15,6 +15,8 @@ class LoadingDialog extends StatelessWidget {
 
   static void hide(BuildContext context) => Navigator.pop(context);
 
+  static void pop(BuildContext context) => Navigator.pop(context);
+
   const LoadingDialog({super.key});
 
   @override

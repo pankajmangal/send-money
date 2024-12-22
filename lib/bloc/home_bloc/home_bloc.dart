@@ -27,7 +27,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       if(result.isSuccess){
         String name = (result.successResponse as Map<String, dynamic>)["name"];
-        emit(HomeSuccessState(userData: UserData(name: name, email: "")));
+        String amount = (result.successResponse as Map<String, dynamic>)["balance"];
+        emit(HomeSuccessState(userData: UserData(name: name, email: "", amount: amount)));
       }else{
         emit(HomeErrorState(errMessage: result.failure?.statusMessage ?? ""));
       }

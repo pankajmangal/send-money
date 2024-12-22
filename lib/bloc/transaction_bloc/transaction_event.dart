@@ -17,3 +17,5 @@ class CreateTransactionEvent extends TransactionEvent {
   @override
   List<Object?> get props => [requestData];
 }
+
+class FetchAllTransactionEvent extends TransactionEvent {}

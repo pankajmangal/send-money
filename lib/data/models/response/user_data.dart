@@ -1,16 +1,19 @@
 class UserData {
   final String name;
   final String email;
+  final String amount;
 
   const UserData({
     required this.name,
     required this.email,
+    required this.amount
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) {
     return UserData(
-      name: json["main"]["temp"],
-      email: json["weather"][0]["icon"],
+      name: json["name"],
+      email: json["email"],
+      amount: json["amount"],
     );
   }
 }
