@@ -21,34 +21,35 @@ class TransactionHistoryData {
 }
 
 class TransactionData {
-  final String id;
+  // final String id;
   final String transactionId;
   final String amount;
   final DateTime createdAt;
-  final int v;
+  // final int v;
 
+  // required this.v,
+  // required this.id,
   TransactionData({
-    required this.id,
     required this.transactionId,
     required this.amount,
-    required this.createdAt,
-    required this.v,
+    required this.createdAt
   });
 
+  // v: json["__v"],
+  // id: json["_id"],
   factory TransactionData.fromMap(Map<String, dynamic> json) => TransactionData(
-    id: json["_id"],
+
     transactionId: json["transactionID"],
     amount: json["amount"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    v: json["__v"],
+    createdAt: DateTime.parse(json["createdAt"])
   );
 
+  //"__v": v,
+  // "_id": id,
   Map<String, dynamic> toMap() => {
-    "_id": id,
     "transactionID": transactionId,
     "amount": amount,
-    "createdAt": createdAt.toIso8601String(),
-    "__v": v,
+    "createdAt": createdAt.toIso8601String()
   };
 }
 

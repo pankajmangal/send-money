@@ -7,6 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:send_money/bloc/auth_bloc/auth_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_toggle_bloc.dart';
+import 'package:send_money/bloc/network_block/network_bloc.dart';
+import 'package:send_money/bloc/network_block/network_event.dart';
 import 'package:send_money/bloc/transaction_bloc/transaction_bloc.dart';
 import 'package:send_money/data/repository/auth_repo.dart';
 import 'package:send_money/data/repository/transaction_repo.dart';
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
         builder: (_, child) {
           return MultiBlocProvider(
             providers: [
+              BlocProvider<NetworkBloc>(create: (context) => NetworkBloc()..add(NetworkObserve())),
               BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepo: AuthRepo())),
               BlocProvider<HomeBloc>(create: (context) => HomeBloc(authRepo: AuthRepo())),
               BlocProvider<HomeToggleBloc>(create: (context) => HomeToggleBloc()),

@@ -18,6 +18,7 @@ import 'package:send_money/utils/ColorUtils.dart';
 import 'package:send_money/utils/DimensionUtils.dart';
 import 'package:send_money/utils/GapUtils.dart';
 import 'package:send_money/utils/ImageUtils.dart';
+import 'package:send_money/utils/NetworkUtils.dart';
 import 'package:send_money/utils/StringUtils.dart';
 import 'package:send_money/utils/StyleUtils.dart';
 
@@ -157,10 +158,17 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
     }
     if (formKey.currentState!.validate() &&
         transactionController.value.text.isNotEmpty) {
-      transactionBloc.add(CreateTransactionEvent(
-          requestData: CreateTransactionRequestData(
-              amount:
-              transactionController.text.toString())));
+        if(await NetworkUtils.checkNetwork()) {
+          transactionBloc.add(CreateTransactionEvent(
+              requestData: CreateTransactionRequestData(
+                  amount:
+                  transactionController.text.toString())));
+        } else {
+          await showError(
+              context: context,
+              error: "No Internet Connection");
+          return;
+        }
     }
   }
 
@@ -180,11 +188,12 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
       });
     })*/;
 
-    if(isSheetClosed != null && isSheetClosed == false){
-      Future.delayed(const Duration(seconds: 5), (){
-        LoadingDialog.pop(context);
-      });
-    }
+    // debugPrint("isSheetClosed => $isSheetClosed");
+    // if(isSheetClosed != null && isSheetClosed == true){
+    //   Future.delayed(const Duration(seconds: 5), (){
+    //     LoadingDialog.pop(context);
+    //   });
+    // }
   }
 
   @override

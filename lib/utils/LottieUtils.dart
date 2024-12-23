@@ -8,4 +8,7 @@ class LottieUtils {
 
   static LottieBuilder failureLottie =
   Lottie.asset("assets/lottie/failure-lottie.json", fit: BoxFit.fill);
+
+  static LottieBuilder noInternetLottie =
+  Lottie.asset("assets/lottie/no-internet-connection.json", fit: BoxFit.fill, repeat: true);
 }

@@ -19,3 +19,5 @@ class CreateTransactionEvent extends TransactionEvent {
 }
 
 class FetchAllTransactionEvent extends TransactionEvent {}
+
+class FetchAllTransactionFromLocalEvent extends TransactionEvent {}

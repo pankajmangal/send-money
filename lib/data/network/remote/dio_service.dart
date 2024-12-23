@@ -8,8 +8,6 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:send_money/data/network/local/secure_storage_service.dart';
 import 'package:send_money/data/network/remote/api_endpoints.dart';
 import 'package:send_money/data/network/remote/dio_interceptor.dart';
-import 'package:send_money/data/network/remote/refresh_token_interceptor.dart';
-
 import 'network_enums.dart';
 
 class DioService {

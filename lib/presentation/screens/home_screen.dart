@@ -10,6 +10,7 @@ import 'package:send_money/bloc/home_bloc/home_toggle_state.dart';
 import 'package:send_money/data/network/local/secure_storage_service.dart';
 import 'package:send_money/presentation/widgets/custom_elevated_button.dart';
 import 'package:send_money/routes/RoutesPath.dart';
+import 'package:send_money/utils/AppUtils.dart';
 import 'package:send_money/utils/ColorUtils.dart';
 import 'package:send_money/utils/DimensionUtils.dart';
 import 'package:send_money/utils/GapUtils.dart';
@@ -218,9 +219,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             );
           } else if(homeState is HomeErrorState){
-            return const SizedBox.shrink();
+            return AppUtils.noInternetAvailableWidget(onRefreshTap: (){
+              homeBloc.add(HomeUserProfileEvent());
+            });
           } else{
-            return const SizedBox.shrink();
+            return AppUtils.noInternetAvailableWidget(onRefreshTap: (){
+              homeBloc.add(HomeUserProfileEvent());
+            });
           }
         }
       ),

@@ -13,7 +13,7 @@ class TransactionInitialState extends TransactionState{}
 class TransactionLoadingState extends TransactionState{}
 
 class TransactionSuccessState extends TransactionState{
-  final TransactionHistoryData historyData;
+  final List<TransactionData> historyData;
 
   const TransactionSuccessState({required this.historyData});
 
