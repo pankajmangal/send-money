@@ -7,7 +7,9 @@ plugins {
 
 android {
     namespace = "com.example.send_money"
-    compileSdk = flutter.compileSdkVersion
+//    compileSdk = flutter.compileSdkVersion
+    compileSdkVersion 34
+    buildToolsVersion "33.0.3"
     ndkVersion = "25.1.8937393" /*flutter.ndkVersion*/
 
     compileOptions {
