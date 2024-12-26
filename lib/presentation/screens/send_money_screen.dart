@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:send_money/bloc/create_transaction_bloc/transaction_bloc.dart';
+import 'package:send_money/bloc/create_transaction_bloc/transaction_event.dart';
+import 'package:send_money/bloc/create_transaction_bloc/transaction_state.dart';
 import 'package:send_money/bloc/home_bloc/home_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_event.dart';
-import 'package:send_money/bloc/transaction_bloc/transaction_bloc.dart';
-import 'package:send_money/bloc/transaction_bloc/transaction_event.dart';
-import 'package:send_money/bloc/transaction_bloc/transaction_state.dart';
 import 'package:send_money/data/models/request/create_transaction_request_data.dart';
 import 'package:send_money/presentation/bottom_sheet/transaction_status_bottom_sheet.dart';
 import 'package:send_money/presentation/widgets/custom_elevated_button.dart';
@@ -101,7 +101,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                 LoadingDialog.show(context);
               }
 
-              if(state is TransactionCreateSuccessState){
+              if(state is TransactionSuccessState){
                 LoadingDialog.hide(context);
                 transactionController.clear();
                 AppUtils.hideKeyboardWithoutContext();
@@ -177,7 +177,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
   }
 
   void _successTransactionBottomSheet(BuildContext context) async{
-    bool? isSheetClosed = await showModalBottomSheet<bool?>(
+    /*bool? isSheetClosed = await*/ showModalBottomSheet<bool?>(
         context: context,
         isDismissible: true,
         builder: (builder) {

@@ -5,11 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:send_money/bloc/auth_bloc/auth_bloc.dart';
+import 'package:send_money/bloc/create_transaction_bloc/transaction_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_toggle_bloc.dart';
 import 'package:send_money/bloc/network_block/network_bloc.dart';
 import 'package:send_money/bloc/network_block/network_event.dart';
-import 'package:send_money/bloc/transaction_bloc/transaction_bloc.dart';
+import 'package:send_money/bloc/transaction_history_bloc/transaction_history_bloc.dart';
 import 'package:send_money/data/repository/auth_repo.dart';
 import 'package:send_money/data/repository/transaction_repo.dart';
 import 'package:send_money/routes/PageRoutes.dart';
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
               BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepo: AuthRepo())),
               BlocProvider<HomeBloc>(create: (context) => HomeBloc(authRepo: AuthRepo())),
               BlocProvider<HomeToggleBloc>(create: (context) => HomeToggleBloc()),
-              BlocProvider<TransactionBloc>(create: (context) => TransactionBloc(transactionRepo: TransactionRepo()))
+              BlocProvider<TransactionBloc>(create: (context) => TransactionBloc(transactionRepo: TransactionRepo())),
+              BlocProvider<TransactionHistoryBloc>(create: (context) => TransactionHistoryBloc(transactionRepo: TransactionRepo()))
             ],
             child: MaterialApp(
                 title: 'Flutter Demo',

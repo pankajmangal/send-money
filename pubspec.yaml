@@ -59,6 +59,9 @@ dependencies:
   #mockito
   mockito: ^5.4.4
 
+  #GetIt or dependency Inversion/Injector
+  get_it: ^8.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

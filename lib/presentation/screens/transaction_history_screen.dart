@@ -7,11 +7,10 @@ import 'package:send_money/bloc/home_bloc/home_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_event.dart';
 import 'package:send_money/bloc/network_block/network_bloc.dart';
 import 'package:send_money/bloc/network_block/network_state.dart';
-import 'package:send_money/bloc/transaction_bloc/transaction_bloc.dart';
-import 'package:send_money/bloc/transaction_bloc/transaction_event.dart';
-import 'package:send_money/bloc/transaction_bloc/transaction_state.dart';
+import 'package:send_money/bloc/transaction_history_bloc/transaction_history_bloc.dart';
+import 'package:send_money/bloc/transaction_history_bloc/transaction_history_event.dart';
+import 'package:send_money/bloc/transaction_history_bloc/transaction_history_state.dart';
 import 'package:send_money/data/models/response/transaction_history_data.dart';
-import 'package:send_money/presentation/widgets/custom_error_dialog.dart';
 import 'package:send_money/utils/ColorUtils.dart';
 import 'package:send_money/utils/DimensionUtils.dart';
 import 'package:send_money/utils/GapUtils.dart';
@@ -34,7 +33,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   late NetworkBloc networkBloc;
 
   //Transaction bloc instance here...
-  late TransactionBloc transactionBloc;
+  late TransactionHistoryBloc transactionBloc;
 
   @override
   void initState() {
@@ -43,13 +42,13 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
 
     networkBloc = BlocProvider.of<NetworkBloc>(context);
     homeBloc = BlocProvider.of<HomeBloc>(context);
-    transactionBloc = BlocProvider.of<TransactionBloc>(context);
-    // fetchTransactions();
+    transactionBloc = BlocProvider.of<TransactionHistoryBloc>(context);
+    fetchTransactions();
   }
 
   fetchTransactions() async {
     if(await NetworkUtils.checkNetwork()){
-      transactionBloc.add(FetchAllTransactionEvent());
+      transactionBloc.add(FetchAllTransactionFromServerEvent());
     } else {
       // await showError(
       //     context: context,
@@ -107,20 +106,21 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
           listener: (ctx, networkState) {
             if (networkState is NetworkFailure) {
               transactionBloc.add(FetchAllTransactionFromLocalEvent());
-              // Fluttertoast.showToast(msg: "No Internet Connection");
+              Fluttertoast.showToast(msg: "No Internet Connection");
             } else if (networkState is NetworkSuccess) {
               fetchTransactions();
-              // Fluttertoast.showToast(msg: "You're Connected to Internet");
+              Fluttertoast.showToast(msg: "You're Connected to Internet");
             } else {
               Fluttertoast.showToast(msg: "Something went wrong!");
             }
           },
-          child: BlocBuilder<TransactionBloc, TransactionState>(
+          child: BlocBuilder<TransactionHistoryBloc, TransactionHistoryState>(
               bloc: transactionBloc,
               builder: (context, state) {
-                if (state is TransactionLoadingState) {
+                debugPrint("TransactionStateType => ${state.runtimeType}");
+                if (state is TransactionHistoryLoadingState) {
                   return const Center(child: CircularProgressIndicator());
-                } else if (state is TransactionSuccessState) {
+                } else if (state is TransactionHistorySuccessState) {
                   return Container(
                     width: size.width,
                     height: size.height,
@@ -189,7 +189,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
                           );
                         }),
                   );
-                } else if (state is TransactionErrorState) {
+                } else if (state is TransactionHistoryErrorState) {
                   return Center(
                       child: Text(
                     state.errMessage,
@@ -215,6 +215,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
     super.dispose();
 
     // homeBloc.close();
+    // networkBloc.close();
     // transactionBloc.close();
   }
 }
