@@ -10,7 +10,7 @@ class ApiEndpoints {
 
   //Base url here....
   // static const baseUrl = "http://10.0.2.2:3000/";
-  static const baseUrl = "https://9691-2401-4900-1c68-671c-14ce-532e-6bed-cdfd.ngrok-free.app/";
+  static const baseUrl = "https://21f6-2401-4900-a059-37ce-7439-7551-7c98-9196.ngrok-free.app/";
 
   //Api endpoints here...
   static const loginUrl = "api/authenticate";

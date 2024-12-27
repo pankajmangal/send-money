@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_it/get_it.dart';
 import 'package:send_money/bloc/auth_bloc/auth_bloc.dart';
 import 'package:send_money/bloc/create_transaction_bloc/transaction_bloc.dart';
 import 'package:send_money/bloc/home_bloc/home_bloc.dart';
@@ -22,11 +23,14 @@ void main() async{
 
   //Http overrides to handle certificates related issues....
   // HttpOverrides.global = MyHttpOverrides();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  ///dependency innjection- Creates Singleton objects
+  final getIt = GetIt.instance;
 
   // This widget is the root of your application.
   @override
@@ -36,13 +40,14 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {
+
           return MultiBlocProvider(
             providers: [
               BlocProvider<NetworkBloc>(create: (context) => NetworkBloc()..add(NetworkObserve())),
               BlocProvider<AuthBloc>(create: (context) => AuthBloc(authRepo: AuthRepo())),
               BlocProvider<HomeBloc>(create: (context) => HomeBloc(authRepo: AuthRepo())),
               BlocProvider<HomeToggleBloc>(create: (context) => HomeToggleBloc()),
-              BlocProvider<TransactionBloc>(create: (context) => TransactionBloc(transactionRepo: TransactionRepo())),
+              BlocProvider<TransactionBloc>(create: (context) => TransactionBloc(transactionRepo: getIt.registerSingleton<TransactionRepo>(TransactionRepo()))),
               BlocProvider<TransactionHistoryBloc>(create: (context) => TransactionHistoryBloc(transactionRepo: TransactionRepo()))
             ],
             child: MaterialApp(
