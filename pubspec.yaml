@@ -56,9 +56,6 @@ dependencies:
   #intl
   intl: ^0.20.1
 
-  #mockito
-  mockito: ^5.4.4
-
   #GetIt or dependency Inversion/Injector
   get_it: ^8.0.3
 
@@ -68,7 +65,17 @@ dev_dependencies:
 
   test: ^1.25.7
   flutter_lints: ^4.0.0
+
+  #mock
+  mockito: ^5.4.4
+  http_mock_adapter: ^0.6.1
+
+  #bloc unit test
   bloc_test: ^9.1.7
+
+  # Model generation and serialization
+  build_runner: ^2.4.13
+  built_value_generator: ^8.9.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
