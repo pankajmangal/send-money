@@ -57,14 +57,14 @@ void main() {
         expect: () => [AuthLoadingState(), const AuthErrorState(errMessage: "Something went wrong!")]);
 
     blocTest<AuthBloc, AuthState>(
-        "When entered wrong data in that field",
+        "When entered correct data in that field",
         build: () {
           when(() => mockAuthRepo.userAuthenticate(UserAuthenticateRequestData(email: "mangal.pankaj5@gmail.com", password: "Mangal@720")).then((result) => Result.success(successResponse: {"token": ""})));
           return authBloc;
         },
         act: (dynamic b) => b.add(AuthLoginEvent(requestData: UserAuthenticateRequestData(email: "mangal.pankaj5@gmail.com", password: "Mangal@720"))),
         wait:  const Duration(milliseconds: 500),
-        expect: () => [AuthLoadingState(), /*const AuthErrorState(errMessage: "Something went wrong!")*/]);
+        expect: () => [AuthLoadingState(), const AuthErrorState(errMessage: "Something went wrong!")]);
     /*testWidgets('Counter increments smoke test', (WidgetTester tester) async {
 
 
