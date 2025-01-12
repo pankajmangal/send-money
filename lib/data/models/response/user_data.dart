@@ -1,7 +1,7 @@
 class UserData {
   final String name;
   final String email;
-  final String amount;
+  final num amount;
 
   const UserData({
     required this.name,

@@ -1,13 +1,9 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:send_money/data/models/request/create_transaction_request_data.dart';
 import 'package:send_money/data/models/response/transaction_history_data.dart';
-import 'package:send_money/data/models/request/user_authenticate_request_data.dart';
 import 'package:send_money/data/network/remote/api_endpoints.dart';
 import 'package:send_money/data/network/remote/api_result.dart';
-import 'package:send_money/data/network/remote/dio_client.dart';
 import 'package:send_money/data/network/remote/dio_exceptions.dart';
 import 'package:send_money/data/network/remote/dio_service.dart';
 import 'package:send_money/data/network/remote/network_enums.dart';

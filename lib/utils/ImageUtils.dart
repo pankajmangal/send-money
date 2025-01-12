@@ -4,5 +4,5 @@ class ImageUtils {
 
   static const sendMoneyImg = "assets/png_images/send_money.png";
   static const coinImg = "assets/png_images/coin.png";
-
+  static const refreshImg = "assets/png_images/refresh_page.png";
 }

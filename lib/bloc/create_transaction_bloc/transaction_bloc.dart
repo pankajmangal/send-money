@@ -17,7 +17,7 @@ class TransactionBloc extends Bloc<TransactionEvent, TransactionState> {
     CreateTransactionEvent event,
     Emitter<TransactionState> emit,
   ) async {
-    emit((TransactionLoadingState()));
+    emit(TransactionLoadingState());
     try {
       final Result result =
           await transactionRepo.createTransaction(event.requestData);

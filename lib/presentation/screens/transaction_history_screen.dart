@@ -8,8 +8,6 @@ import 'package:send_money/bloc/home_bloc/home_event.dart';
 import 'package:send_money/bloc/network_block/network_bloc.dart';
 import 'package:send_money/bloc/network_block/network_state.dart';
 import 'package:send_money/bloc/transaction_history_bloc/transaction_history_bloc.dart';
-import 'package:send_money/bloc/transaction_history_bloc/transaction_history_event.dart';
-import 'package:send_money/bloc/transaction_history_bloc/transaction_history_state.dart';
 import 'package:send_money/data/models/response/transaction_history_data.dart';
 import 'package:send_money/utils/ColorUtils.dart';
 import 'package:send_money/utils/DimensionUtils.dart';
@@ -28,6 +26,7 @@ class TransactionHistoryScreen extends StatefulWidget {
 }
 
 class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
+
   //Home bloc instance...
   late HomeBloc homeBloc;
   late NetworkBloc networkBloc;
@@ -38,12 +37,12 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   @override
   void initState() {
     super.initState();
-    if (!mounted) return;
 
+    if (!mounted) return;
     networkBloc = BlocProvider.of<NetworkBloc>(context);
     homeBloc = BlocProvider.of<HomeBloc>(context);
     transactionBloc = BlocProvider.of<TransactionHistoryBloc>(context);
-    fetchTransactions();
+    // fetchTransactions();
   }
 
   fetchTransactions() async {
@@ -109,7 +108,7 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
               Fluttertoast.showToast(msg: "No Internet Connection");
             } else if (networkState is NetworkSuccess) {
               fetchTransactions();
-              Fluttertoast.showToast(msg: "You're Connected to Internet");
+              // Fluttertoast.showToast(msg: "You're Connected to Internet");
             } else {
               Fluttertoast.showToast(msg: "Something went wrong!");
             }
@@ -213,7 +212,6 @@ class _TransactionHistoryScreenState extends State<TransactionHistoryScreen> {
   @override
   void dispose() {
     super.dispose();
-
     // homeBloc.close();
     // networkBloc.close();
     // transactionBloc.close();

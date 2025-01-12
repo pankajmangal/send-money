@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:send_money/bloc/transaction_history_bloc/transaction_history_event.dart';
-import 'package:send_money/bloc/transaction_history_bloc/transaction_history_state.dart';
 import 'package:send_money/data/models/response/transaction_history_data.dart';
 import 'package:send_money/data/network/remote/api_result.dart';
 import 'package:send_money/data/repository/transaction_repo.dart';
 import 'package:send_money/utils/DatabaseUtils.dart';
+import 'package:equatable/equatable.dart';
+
+part 'transaction_history_event.dart';
+part 'transaction_history_state.dart';
 
 class TransactionHistoryBloc extends Bloc<TransactionHistoryEvent, TransactionHistoryState> {
   final TransactionRepo transactionRepo;
@@ -32,7 +34,6 @@ class TransactionHistoryBloc extends Bloc<TransactionHistoryEvent, TransactionHi
         // Clear the existing data in the database before saving the new list
         await DatabaseUtils().clearDatabase();
         DatabaseUtils().insertTransactionList(transactionHistoryData.data);
-        debugPrint("InsertedRowCount => insertedRows");
         emit(TransactionHistorySuccessState(historyData: transactionHistoryData.data));
       } else {
         emit(TransactionHistoryErrorState(
@@ -49,7 +50,6 @@ class TransactionHistoryBloc extends Bloc<TransactionHistoryEvent, TransactionHi
   ) async {
     emit((TransactionHistoryLoadingState()));
     try {
-      debugPrint("InsertedRowCount => {transactionHistoryData.length}");
       List<TransactionData> transactionHistoryData =
           await DatabaseUtils().getTransactionMapList();
       debugPrint("InsertedRowCount => ${transactionHistoryData.length}");

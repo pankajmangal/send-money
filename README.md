@@ -1,16 +1,30 @@
 # send_money
 
-A new Flutter project.
+This project is based on assignment purpose. We will enhance the further feature or improvements as we go with tasks...
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Design Architecture
+Clean architecture or MVVM
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## State management
+Bloc (or Business Logic component) that separates the business logic from UI component
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Network calls
+We are using Dio package for handling API calls with handling custom exceptions or errors and interceptors...
+
+## Features includes:
+- Offline mode support
+- Unit tests
+- Bloc tests
+- Integration tests
+
+## Credential to access this application
+username: mangal.pankaj5@gmail.com
+password: Mangal@720
+
+## Unit testing
+- Run command
+     flutter test test/transaction_bloc_test.dart

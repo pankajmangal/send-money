@@ -83,6 +83,12 @@ class _HomeScreenState extends State<HomeScreen> {
          child: Image.asset(ImageUtils.userProfileImg, width: 44.w, height: 44.h)),
           Padding(padding: const EdgeInsets.only(right: DimensionUtils.padding12),
               child: InkWell(
+                onTap: () {
+                  homeBloc.add(HomeUserProfileEvent());
+                },
+                  child: Image.asset(ImageUtils.refreshImg, width: 44.w, height: 44.h))),
+          Padding(padding: const EdgeInsets.only(right: DimensionUtils.padding12),
+              child: InkWell(
                 onTap: (){
                   showDialog(context: context,
                       barrierDismissible: false,
@@ -180,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         VerticalGap(gap: 2.h),
                                         Text(
-                                            state.isSwitchChanged ? "${homeState.userData.amount}php" : "******",
+                                            state.isSwitchChanged ? "${homeState.userData.amount.toStringAsFixed(2)}php" : "******",
                                             textAlign:
                                             TextAlign.start,
                                             style: StyleUtils.tsRegularTitleStyle28
@@ -236,7 +242,9 @@ class _HomeScreenState extends State<HomeScreen> {
   navigateToTransactionScreen() => Navigator.pushNamed(context, RoutesPath.TRANSACTION_HISTORY);
 
   //Navigate to send money route....
-  navigateToSendMoneyScreen() => Navigator.pushNamed(context, RoutesPath.SEND_MONEY);
+  navigateToSendMoneyScreen() => Navigator.pushNamed(context, RoutesPath.SEND_MONEY).then((value){
+    homeBloc.add(HomeUserProfileEvent());
+  }).catchError((err){});
 
   //Navigate to login route....
   navigateToLogin() => Navigator.pushNamedAndRemoveUntil(context,

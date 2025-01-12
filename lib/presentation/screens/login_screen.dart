@@ -247,3 +247,9 @@ class _LoginScreenState extends State<LoginScreen> {
     pwdController.dispose();
   }
 }
+
+abstract interface class ApiClients {
+  late String bar;
+
+  String getFormattedBar();   // Works fine :)
+}

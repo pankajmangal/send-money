@@ -128,7 +128,7 @@ class _SendMoneyScreenState extends State<SendMoneyScreen> {
                     children: [
                       CustomTextField(
                         controller: transactionController,
-                        autoValidateMode: AutovalidateMode.onUserInteraction,
+                        autoValidateMode: AutovalidateMode.disabled,
                         type: FieldType.numeric,
                         hintText: "Amount (in php)",
                       ),
